@@ -1,4 +1,4 @@
-from Domain.cheltuiala import toString
+from Domain.cheltuiala import toString, getsuma, gettipul
 from Logic.CRUD import adaugacheltuiala, stergecheltuiala, modificacheltuiala
 # from Logic.functionalitate import stergereatuturorcheltuielilor
 from Logic.functionalitate import adunarevaloare, ceamaimarecheltuiala
@@ -55,6 +55,7 @@ def uiAdunarevaloare(lista):
     return adunarevaloare(valoare, data1, lista)
 
 
+
 def runMenu(lista):
     while True:
         printMenu()
@@ -73,9 +74,12 @@ def runMenu(lista):
         elif optiune == "5":
             lista = uiAdunarevaloare(lista)
         elif optiune == "6":
-            for i in ceamaimarecheltuiala(lista):
-                maxim=max(ceamaimarecheltuiala(lista)[i], default=0)
-                print("Cea mai mare cheltuiala pentru tipul de cheltuiala",i,"este de :",maxim)
+            lista3=ceamaimarecheltuiala(lista)
+            for i in range(len(lista3)):
+                print(lista3[i][0]+":\n")
+                for cheltuiala in lista:
+                    if getsuma(cheltuiala)== lista3[i][1] and gettipul(cheltuiala)==lista3[i][0]:
+                        print(cheltuiala,"\n")
         elif optiune == "x":
             break
         else:

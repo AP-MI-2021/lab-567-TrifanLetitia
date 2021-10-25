@@ -1,6 +1,6 @@
 from Tests.testCRUD import testAdaugacheltuiala, testStergecheltuiala, testModificacheltuiala
 from Tests.testDomain import testcheltuiala
-from Tests.testfunctionalitati import testadunarevalori
+from Tests.testfunctionalitati import testadunarevalori, testceamaimarevaloare
 
 
 def runAllTests():
@@ -9,4 +9,6 @@ def runAllTests():
     testStergecheltuiala()
     testModificacheltuiala()
     testadunarevalori()
+    testceamaimarevaloare()
 
+runAllTests()

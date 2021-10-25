@@ -1,4 +1,5 @@
-from Domain.cheltuiala import getdata, creeazacheltuiala, getnrapartament, getsuma, gettipul
+from Domain.cheltuiala import getdata, creeazacheltuiala, getnrapartament, gettipul, getsuma
+
 
 def adunarevaloare(valoare,data1,lista):
     listaNoua=[]
@@ -18,9 +19,9 @@ def adunarevaloare(valoare,data1,lista):
 
 def ceamaimarecheltuiala(lista):
     '''
-    da un dictionar cu key=tipul de cheltuiala si values=suma cheltuielii
+    determina cea mai mare cheltuiala dintr o lista dupa tipul de cheltuiala
     :param lista: lista de cheltuieli
-    :return: dictionar
+    :return: lista
     '''
     listatip=["intretinere", "canal", "alte cheltuieli"]
     Dict={}
@@ -28,7 +29,14 @@ def ceamaimarecheltuiala(lista):
         Dict[tip]=[]
     for cheltuiala in lista:
         Dict[gettipul(cheltuiala)].append(getsuma(cheltuiala))
-    return Dict
+    Lista1=[]
+    for key, value in Dict.items():
+        temp = [key, max(value, default=0)]
+        Lista1.append(temp)
+    return Lista1
+
+
+
 
 
 

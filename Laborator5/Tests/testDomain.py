@@ -8,3 +8,5 @@ def testcheltuiala():
     assert getsuma(cheltuiala) == 250
     assert getdata(cheltuiala) == "10.09.2021"
     assert gettipul(cheltuiala) == "intretinere"
+
+

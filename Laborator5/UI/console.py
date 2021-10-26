@@ -38,7 +38,7 @@ def uiModificacheltuiala(lista):
     suma = float(input("Dati noua suma: "))
     data = input("Dati noua data a cheltuielii: ")
     tipul = input("Dati noul tip al cheltuielii: ")
-    return modificacheltuiala(nrapartament, suma, data, tipul)
+    return modificacheltuiala(nrapartament, suma, data, tipul,lista)
 
 
 '''

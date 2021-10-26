@@ -8,12 +8,17 @@ def creeazacheltuiala(nrapartament, suma, data, tipul):
     :return:
     '''
 
-    return {
+    Dict={
         "nrapartament": nrapartament,
         "suma": suma,
         "data": data,
         "tipul": tipul,
     }
+    l1=[]
+    for i in Dict:
+        tpl = (i, Dict[i])
+        l1.append(tpl)
+    return l1
 
 
 def getnrapartament(cheltuiala):
@@ -22,7 +27,7 @@ def getnrapartament(cheltuiala):
     :param cheltuiala: dictionar ce contine o cheltuiala
     :return: numarul apartamentului
     '''
-    return cheltuiala["nrapartament"]
+    return cheltuiala[0][1]
 
 
 def getsuma(cheltuiala):
@@ -31,7 +36,7 @@ def getsuma(cheltuiala):
     :param cheltuiala: dictionar ce contine o cheltuiala
     :return: suma (float)
     '''
-    return cheltuiala["suma"]
+    return cheltuiala[1][1]
 
 
 
@@ -41,7 +46,7 @@ def getdata(cheltuiala):
     :param cheltuiala: dictionar ce contine o cheltuiala
     :return: data (string)
     '''
-    return cheltuiala["data"]
+    return cheltuiala[2][1]
 
 
 def gettipul(cheltuiala):
@@ -50,7 +55,7 @@ def gettipul(cheltuiala):
     :param cheltuiala: dictionar ce contine o cheltuiala
     :return: tipul cheltuielii (string)
     '''
-    return cheltuiala["tipul"]
+    return cheltuiala[3][1]
 
 
 def toString(cheltuiala):

@@ -1,5 +1,6 @@
+from Domain import cheltuiala
 from Domain.cheltuiala import getnrapartament, getsuma, getdata, gettipul
-from Logic.CRUD import adaugacheltuiala, getBynrapartament, stergecheltuiala, modificacheltuiala
+from Logic.CRUD import adaugacheltuiala, getBynrapartament, stergecheltuiala, modificacheltuiala, getBydata
 
 
 def testAdaugacheltuiala():
@@ -57,3 +58,15 @@ def testModificacheltuiala():
     assert getsuma(cheltuialaNeupdatata) == 250
     assert getdata(cheltuialaNeupdatata) == "10.09.2021"
     assert gettipul(cheltuialaNeupdatata) == "intretinere"
+
+def testgetByData():
+    lista=[]
+    lista=adaugacheltuiala(1, 250,"10.09.2021" ,"intretinere",lista)
+    assert getBydata("12.03.2021",lista)==None
+
+def testgetBynrapartament():
+       lista = []
+       lista = adaugacheltuiala(1, 250, "10.09.2021", "intretinere", lista)
+       assert getBynrapartament(1,lista) == [('nrapartament', 1), ('suma', 250), ('data', '10.09.2021'), ('tipul', 'intretinere')]
+
+

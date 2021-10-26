@@ -1,4 +1,5 @@
-from Tests.testCRUD import testAdaugacheltuiala, testStergecheltuiala, testModificacheltuiala
+from Tests.testCRUD import testAdaugacheltuiala, testStergecheltuiala, testModificacheltuiala, testgetByData, \
+    testgetBynrapartament
 from Tests.testDomain import testcheltuiala
 from Tests.testfunctionalitati import testadunarevalori, testceamaimarevaloare
 
@@ -10,5 +11,7 @@ def runAllTests():
     testModificacheltuiala()
     testadunarevalori()
     testceamaimarevaloare()
+    testgetByData()
+    testgetBynrapartament()
 
 runAllTests()

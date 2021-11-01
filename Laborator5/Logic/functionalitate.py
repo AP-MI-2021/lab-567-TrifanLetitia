@@ -1,7 +1,17 @@
+from Domain import cheltuiala
 from Domain.cheltuiala import getdata, creeazacheltuiala, getnrapartament, gettipul, getsuma
 
 
 def adunarevaloare(valoare,data1,lista):
+    '''
+    aduna o valoare la toate cheltuielile dintr-o data citita
+    :param valoare: float
+    :param data1: date
+    :param lista: lista de cheltuieli
+    :return: lista in care cheltuielile care contin data citita s-au modificat
+    '''
+    if valoare < 0:
+        raise ValueError("Valoarea care se aduna trebuie sa fie pozitiva!")
     listaNoua=[]
     for cheltuiala in lista:
         if data1==getdata(cheltuiala):
@@ -34,6 +44,33 @@ def ceamaimarecheltuiala(lista):
         temp = [key, max(value, default=0)]
         Lista1.append(temp)
     return Lista1
+
+def ordonaredescdupasuma(lista):
+    '''
+    ordoneaza descrecator cheltuielile dupa suma cheltuielii
+    :param lista: lista de cheltuieli
+    :return: lista ordonata descrescator
+    '''
+    return sorted(lista, key=getsuma , reverse=True)
+
+
+def afisareasumelorlunare(lista):
+    '''
+    determina sumele lunare
+    :param lista: lista de cheltuieli
+    :return: luna si suma cheltuielilor din luna respectiva
+    '''
+
+    rezultat={}
+    for cheltuiala in lista:
+        luna = getdata(cheltuiala).split(".")[1]
+        suma=getsuma(cheltuiala)
+        if luna in rezultat:
+            rezultat[luna] = rezultat[luna]+ suma
+        else:
+            rezultat[luna] = suma
+    return rezultat
+
 
 
 

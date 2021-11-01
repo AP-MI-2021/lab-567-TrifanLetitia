@@ -1,4 +1,4 @@
-from Domain.cheltuiala import creeazacheltuiala, getnrapartament, getdata
+from Domain.cheltuiala import creeazacheltuiala, getnrapartament, getdata, gettipul
 
 
 def adaugacheltuiala(nrapartament, suma, data, tipul,lista):
@@ -27,6 +27,18 @@ def getBynrapartament(nrapartament, lista):
             return cheltuiala
     return None
 
+def getBytipul(tipul,lista):
+    '''
+
+    :param tipul:
+    :param lista:
+    :return:
+    '''
+    for cheltuiala in lista:
+        if gettipul(cheltuiala) == tipul:
+            return cheltuiala
+    return None
+
 def getBydata(data,lista):
     '''
 
@@ -46,6 +58,8 @@ def stergecheltuiala(nrapartament, lista):
     :param lista: lista de cheltuieli
     :return: o lista de cheltuieli fara elementul cu numarul apartamentului dat
     '''
+    if getBynrapartament(nrapartament, lista) is None:
+        raise ValueError("Nu exista o cheltuiala cu numarul de apartament dat!")
     return [cheltuiala for cheltuiala in lista if getnrapartament(cheltuiala) != nrapartament]
 
 
@@ -59,7 +73,8 @@ def modificacheltuiala(nrapartament, suma, data, tipul, lista):
     :param lista: lista de cheltuieli
     :return: lista modificata
     '''
-
+    if getBynrapartament(nrapartament, lista) is None:
+        raise ValueError("Nu exista o cheltuiala cu numarul de apartament dat!")
     listaNoua = []
     for cheltuiala in lista:
         if getnrapartament(cheltuiala) == nrapartament:

@@ -24,10 +24,15 @@ def testStergecheltuiala():
     assert getBynrapartament(1, lista) is None
     assert getBynrapartament(2, lista) is not None
 
-    lista = stergecheltuiala(3, lista)
 
-    assert len(lista) == 1
-    assert getBynrapartament(2, lista) is not None
+    try:
+        lista = stergecheltuiala(3, lista)
+        assert False
+    except ValueError:
+        assert len(lista) == 1
+        assert getBynrapartament(2, lista) is not None
+    except Exception:
+        assert False
 
 def testModificacheltuiala():
     lista = []
@@ -50,14 +55,17 @@ def testModificacheltuiala():
 
     lista = []
     lista = adaugacheltuiala(1, 250, "10.09.2021", "intretinere", lista)
+    try:
+        lista = modificacheltuiala(3, 400, "9.10.2021", "alte cheltuieli", lista)
+    except ValueError:
+        cheltuialaNeupdatata = getBynrapartament(1, lista)
+        assert getnrapartament(cheltuialaNeupdatata) == 1
+        assert getsuma(cheltuialaNeupdatata) == 250
+        assert getdata(cheltuialaNeupdatata) == "10.09.2021"
+        assert gettipul(cheltuialaNeupdatata) == "intretinere"
+    except Exception:
+        assert False
 
-    lista = modificacheltuiala(3, 400, "9.10.2021", "alte cheltuieli", lista)
-
-    cheltuialaNeupdatata = getBynrapartament(1, lista)
-    assert getnrapartament(cheltuialaNeupdatata) == 1
-    assert getsuma(cheltuialaNeupdatata) == 250
-    assert getdata(cheltuialaNeupdatata) == "10.09.2021"
-    assert gettipul(cheltuialaNeupdatata) == "intretinere"
 
 def testgetByData():
     lista=[]
@@ -67,6 +75,6 @@ def testgetByData():
 def testgetBynrapartament():
        lista = []
        lista = adaugacheltuiala(1, 250, "10.09.2021", "intretinere", lista)
-       assert getBynrapartament(1,lista) == [('nrapartament', 1), ('suma', 250), ('data', '10.09.2021'), ('tipul', 'intretinere')]
+       assert getBynrapartament(1,lista) == {'nrapartament': 1, 'suma': 250, 'data': '10.09.2021', 'tipul': 'intretinere'}
 
 

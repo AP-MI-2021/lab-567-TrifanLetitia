@@ -31,16 +31,10 @@ def uiAdaugacheltuiala(lista):
         suma = float(input("Dati suma cheltuielii: "))
         data1 = input("Dati data cheltuielii: ")
         data = datetime.strptime(data1, '%d.%m.%Y').date().strftime("%d.%m.%Y")
-        #listatip = ['intretinere', 'canal', 'alte cheltuieli']
+        listatip = ["intretinere", "canal", "alte cheltuieli"]
         tipul = input("Dati tipul cheltuielii: ")
-        '''
-        for tipul1 in listatip:
-            if tipul1 != tipul:
-                raise ValueError("Nu exista acest tip de cheltuiala!")
-            else:
-                return tipul
-        '''
-
+        if tipul not in listatip:
+            raise ValueError("Nu exista acest tip de cheltuiala!")
         return adaugacheltuiala(nrapartament, suma, data, tipul, lista)
     except ValueError as ve:
         print("Eroare: {}".format(ve))
@@ -63,14 +57,9 @@ def uiModificacheltuiala(lista):
         data1 = input("Dati noua data a cheltuielii: ")
         data = datetime.strptime(data1, '%d.%m.%Y').date().strftime("%d.%m.%Y")
         tipul = input("Dati noul tip al cheltuielii: ")
-        listatip = ['intretinere', 'canal', 'alte cheltuieli']
-        '''
-        for tipul1 in listatip:
-            if tipul1 != tipul:
-                raise ValueError("Nu exista acest tip de cheltuiala!")
-            else:
-                return tipul
-        '''
+        listatip = ["intretinere", "canal", "alte cheltuieli"]
+        if tipul not in listatip:
+            raise ValueError("Nu exista acest tip de cheltuiala!")
         return modificacheltuiala(nrapartament, suma, data, tipul, lista)
     except ValueError as ve:
         print("Eroare: {}".format(ve))

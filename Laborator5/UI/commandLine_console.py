@@ -39,6 +39,9 @@ def readCommandLine(stringCommandLine, lista):
                 data = datetime.strptime(data1, '%d.%m.%Y').date().strftime("%d.%m.%Y")
                 #data = list[i + 3]
                 tipul = list[i + 4]
+                listatip = ["intretinere", "canal", "alte cheltuieli"]
+                if tipul not in listatip:
+                    raise ValueError("Nu exista acest tip de cheltuiala!")
                 lista = adaugacheltuiala(nrapartament, suma, data, tipul, lista)
             except ValueError as ve:
                 print("Eroare: {}".format(ve))
@@ -58,6 +61,9 @@ def readCommandLine(stringCommandLine, lista):
                suma = float(list[i + 2])
                data = list[i + 3]
                tipul = list[i + 4]
+               listatip = ["intretinere", "canal", "alte cheltuieli"]
+               if tipul not in listatip:
+                    raise ValueError("Nu exista acest tip de cheltuiala!")
                lista = modificacheltuiala(nrapartament, suma, data, tipul, lista)
             except ValueError as ve:
                 print("Eroare: {}".format(ve))

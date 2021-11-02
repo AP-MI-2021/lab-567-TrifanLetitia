@@ -17,7 +17,7 @@ def printMenu():
     print("7. Ordonarea cheltuielilor descrescător după sumă")
     print("8. Afișarea sumelor lunare pentru fiecare apartament")
     print("a. Afisare cheltuieli")
-    print("x. Iesire")
+    print("x. Accesarea interfatei de comanda")
 
 
 def showAll(lista):

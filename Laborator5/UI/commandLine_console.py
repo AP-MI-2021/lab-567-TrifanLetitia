@@ -43,15 +43,15 @@ def readCommandLine(stringCommandLine, lista):
             except ValueError as ve:
                 print("Eroare: {}".format(ve))
             print("Adaugarea s a realizat cu succes")
-            i = i + 5
+            i = i + 4
         elif list[i] == "delete":
             try:
                nrapartament = int(list[i + 1])
                lista = stergecheltuiala(nrapartament, lista)
             except ValueError as ve:
               print("Eroare: {}".format(ve))
-            print("Stergerea s a realizat cu succes")
-            i = i + 2
+            print("Stergerea s-a realizat cu succes")
+            i = i + 1
         elif list[i] == "update":
             try:
                nrapartament = int(list[i + 1])
@@ -61,11 +61,11 @@ def readCommandLine(stringCommandLine, lista):
                lista = modificacheltuiala(nrapartament, suma, data, tipul, lista)
             except ValueError as ve:
                 print("Eroare: {}".format(ve))
-            print("Modificarea s a realizat cu succes")
-            i = i + 5
+            print("Modificarea s-a realizat cu succes")
+            i = i + 4
         elif list[i] == "showall":
-            lista = showAllCommand(lista)
-            i = i + 1
+            showAllCommand(lista)
+
     return lista
 
 

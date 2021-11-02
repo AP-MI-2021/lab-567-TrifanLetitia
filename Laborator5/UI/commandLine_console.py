@@ -5,8 +5,8 @@ from Logic.CRUD import adaugacheltuiala, stergecheltuiala, modificacheltuiala
 
 
 def printMenuconsole():
-    print("1. Comenzi.")
-    print("a. Afisare")
+    print("C. Comenzi.")
+    print("b. Afisare")
     print("x. Iesire")
 
 def uireadCommandLine(lista):
@@ -18,9 +18,9 @@ def runConsole(lista):
     while True:
         printMenuconsole()
         optiune = input("Dati optiunea: ")
-        if optiune == "1":
+        if optiune == "C":
             lista = uireadCommandLine(lista)
-        elif optiune == "a":
+        elif optiune == "b":
             showAllCommand(lista)
         elif optiune == "x":
             break

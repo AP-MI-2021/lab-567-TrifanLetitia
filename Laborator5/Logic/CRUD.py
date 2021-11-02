@@ -63,6 +63,7 @@ def stergecheltuiala(nrapartament, lista):
     return [cheltuiala for cheltuiala in lista if getnrapartament(cheltuiala) != nrapartament]
 
 
+
 def modificacheltuiala(nrapartament, suma, data, tipul, lista):
     '''
     modifica o cheltuiala cu numarul apartamentului dat

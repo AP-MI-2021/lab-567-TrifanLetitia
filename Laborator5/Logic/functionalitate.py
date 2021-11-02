@@ -66,7 +66,7 @@ def afisareasumelorlunare(lista):
         luna = getdata(cheltuiala).split(".")[1]
         suma=getsuma(cheltuiala)
         if luna in rezultat:
-            rezultat[luna] = rezultat[luna]+ suma
+            rezultat[luna] = rezultat[luna] + suma
         else:
             rezultat[luna] = suma
     return rezultat

@@ -5,7 +5,7 @@ from Logic.CRUD import adaugacheltuiala, stergecheltuiala, modificacheltuiala
 
 
 def printMenuconsole():
-    print("C. Comenzi.")
+    print("C. Comenzi(Comenzile se separa prin virgule fara spatii.")
     print("b. Afisare")
     print("x. Iesire")
 

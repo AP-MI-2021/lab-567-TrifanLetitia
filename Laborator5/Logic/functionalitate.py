@@ -71,6 +71,22 @@ def afisareasumelorlunare(lista):
             rezultat[luna] = suma
     return rezultat
 
+'''
+def UNDO(lista, undoOperations):
+    if len(undoOperations) > 0:
+        operations = undoOperations.pop()
+        lista = operations()
+    return lista
+
+def REDO(lista, redoOperations):
+    if len(redoOperations) > 0:
+        operations = redoOperations.pop()
+        lista = operations()
+
+    return lista
+'''
+
+
 
 
 

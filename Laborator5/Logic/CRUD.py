@@ -1,8 +1,8 @@
 from Domain.cheltuiala import creeazacheltuiala, getnrapartament, getdata, gettipul
 
 
-def adaugacheltuiala(nrapartament, suma, data, tipul,lista):
-    '''
+def adaugacheltuiala(nrapartament, suma, data, tipul, lista):
+    """
 
     :param nrapartament: int
     :param suma: float
@@ -10,18 +10,18 @@ def adaugacheltuiala(nrapartament, suma, data, tipul,lista):
     :param tipul: string
     :param lista: lista de cheltuieli
     :return: o lista continand atat elementele vechi, cat si noua prajitura
-    '''
+    """
     cheltuiala = creeazacheltuiala(nrapartament, suma, data, tipul)
     return lista + [cheltuiala]
 
 
 def getBynrapartament(nrapartament, lista):
-    '''
+    """
     gaseste o cheltuiala cu numarul apartamentului dat intr-o lista
     :param nrapartament: int
     :param lista: lista de cheltuieli
     :return: cheltuiala cu nr apartamentului dat din lista sau None, daca aceasta nu exista
-    '''
+    """
     for cheltuiala in lista:
         if getnrapartament(cheltuiala) == nrapartament:
             return cheltuiala

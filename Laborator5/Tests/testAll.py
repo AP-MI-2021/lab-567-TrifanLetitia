@@ -16,5 +16,8 @@ def runAllTests():
     testgetBynrapartament()
     testordonaredescdupasuma()
     testafisareasumelorlunare()
+    #testUNDO()
+    #testREDO()
+
 
 runAllTests()

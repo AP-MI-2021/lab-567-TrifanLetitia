@@ -78,15 +78,35 @@ def testafisareasumelorlunare():
     assert rezultat["10"] == 450
     assert rezultat["09"] == 100
 
+'''
+def testUNDO():
+    lista = []
+    lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    lista = adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    lista = adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
 
+    "UNDO"
+    undoOperations=[]
+    undoOperations.append(lambda: stergecheltuiala(3, lista))
+    assert UNDO(lista,undoOperations) == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                                         {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
+    lista=[]
+    lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    lista = adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
 
+    "UNDO"
 
+    undoOperations = []
+    undoOperations.append(lambda: stergecheltuiala(2, lista))
+    assert UNDO(lista, undoOperations) == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
 
+    lista = []
+    lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
 
+    "UNDO"
 
-
-
-
-
-
+    undoOperations = []
+    undoOperations.append(lambda: stergecheltuiala(1, lista))
+    assert UNDO(lista, undoOperations) == []
+'''
 

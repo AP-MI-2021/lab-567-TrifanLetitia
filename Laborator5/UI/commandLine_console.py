@@ -1,13 +1,28 @@
 from datetime import datetime
-
 from Domain.cheltuiala import toString
 from Logic.CRUD import adaugacheltuiala, stergecheltuiala, modificacheltuiala
+from UI.console import runMenu
+
+
+def printMENU():
+    print("1. Accesati interfata veche")
+    print("2. Accesati interfata noua")
+
+def runMENU(lista):
+    while True:
+        printMENU()
+        optiune = input("Alegeti interfata: ")
+
+        if optiune == "1":
+            runMenu(lista)
+        elif optiune == "2":
+            runConsole(lista)
 
 
 def printMenuconsole():
-    print("C. Comenzi(Comenzile se separa prin virgule fara spatii.")
-    print("b. Afisare")
-    print("x. Iesire")
+    print("C. Comenzi(Comenzile se separa prin virgule fara spatii.)")
+    print("A. Afisare")
+    print("I. Iesire")
 
 def uireadCommandLine(lista):
     stringCommandLine = input("Dati comenzile separate prin virgula:")
@@ -20,9 +35,9 @@ def runConsole(lista):
         optiune = input("Dati optiunea: ")
         if optiune == "C":
             lista = uireadCommandLine(lista)
-        elif optiune == "b":
+        elif optiune == "A":
             showAllCommand(lista)
-        elif optiune == "x":
+        elif optiune == "I":
             break
         else:
             print("Optiune gresita!Reincercati!")

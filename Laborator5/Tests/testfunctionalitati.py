@@ -1,6 +1,7 @@
 from Domain.cheltuiala import getsuma, getnrapartament
 from Logic.CRUD import adaugacheltuiala, getBynrapartament, stergecheltuiala
-from Logic.functionalitate import adunarevaloare, ceamaimarecheltuiala, ordonaredescdupasuma, afisareasumelorlunare
+from Logic.functionalitate import adunarevaloare, ceamaimarecheltuiala, ordonaredescdupasuma, afisareasumelorlunare, \
+    UNDO, REDO
 
 
 def testadunarevalori():
@@ -78,35 +79,213 @@ def testafisareasumelorlunare():
     assert rezultat["10"] == 450
     assert rezultat["09"] == 100
 
-'''
+
 def testUNDO():
     lista = []
     lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
     lista = adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
     lista = adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
 
-    "UNDO"
     undoOperations=[]
-    undoOperations.append(lambda: stergecheltuiala(3, lista))
-    assert UNDO(lista,undoOperations) == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
-                                         {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
-    lista=[]
-    lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
-    lista = adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    redoOperations = []
+    undoOperations.append([
+        lambda: stergecheltuiala(3, lista),
+        lambda: adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
+    ])
+    redoOperations.clear()
 
-    "UNDO"
+    lista=UNDO(lista, undoOperations , redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                    {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
 
-    undoOperations = []
-    undoOperations.append(lambda: stergecheltuiala(2, lista))
-    assert UNDO(lista, undoOperations) == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+    undoOperations.append([
+        lambda: stergecheltuiala(2, lista),
+        lambda: adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+    undoOperations.append([
+        lambda: stergecheltuiala(1, lista),
+        lambda: adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == []
+
+    lista= UNDO(lista, undoOperations, redoOperations)
+    assert lista == []
 
     lista = []
     lista = adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    lista = adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    lista = adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
 
-    "UNDO"
+    undoOperations=[]
+    redoOperations=[]
+
+    lista=REDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                     {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'},
+                     {'nrapartament': 3, 'suma': 400, 'data': '10.10.2020', 'tipul': 'intretinere'}]
 
     undoOperations = []
-    undoOperations.append(lambda: stergecheltuiala(1, lista))
-    assert UNDO(lista, undoOperations) == []
-'''
+    redoOperations = []
+    undoOperations.append([
+        lambda: stergecheltuiala(3, lista),
+        lambda: adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                     {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
+
+    undoOperations.append([
+        lambda: stergecheltuiala(2, lista),
+        lambda: adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+    redoOperations.append([
+        lambda: stergecheltuiala(2, lista),
+        lambda: adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    ])
+
+    lista=REDO(lista, undoOperations, redoOperations)
+    assert lista== [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                    {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
+
+    redoOperations.append([
+        lambda: stergecheltuiala(3, lista),
+        lambda: adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
+    ])
+
+    lista=REDO(lista, undoOperations, redoOperations)
+    assert lista==[{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                   {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'},
+                   {'nrapartament': 3, 'suma': 400, 'data': '10.10.2020', 'tipul': 'intretinere'}]
+
+    undoOperations.append([
+        lambda: stergecheltuiala(3, lista),
+        lambda: adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    undoOperations = []
+    redoOperations = []
+    undoOperations.append([
+        lambda: stergecheltuiala(3, lista),
+        lambda: adaugacheltuiala(3, 400, "10.10.2020", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                     {'nrapartament': 2, 'suma': 100, 'data': '11.09.2021', 'tipul': 'intretinere'}]
+
+    undoOperations.append([
+        lambda: stergecheltuiala(2, lista),
+        lambda: adaugacheltuiala(2, 100, "11.09.2021", "intretinere", lista)
+    ])
+    redoOperations.clear()
+
+    lista = UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+    lista=adaugacheltuiala(4,150,"10.10.2020","canal",lista)
+
+    undoOperations.append([
+        lambda: stergecheltuiala(4, lista),
+        lambda: adaugacheltuiala(4,150,"10.10.2020","canal",lista)
+    ])
+    redoOperations.clear()
+    lista=UNDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+    undoOperations.append([
+        lambda: stergecheltuiala(1, lista),
+        lambda: adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    ])
+    redoOperations.clear()
+    lista=UNDO(lista, undoOperations, redoOperations)
+    assert lista== []
+
+    redoOperations.append([
+        lambda: stergecheltuiala(1, lista),
+        lambda: adaugacheltuiala(1, 50, "10.10.2020", "canal", lista)
+    ])
+    lista=REDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+    redoOperations.append([
+        lambda: stergecheltuiala(4, lista),
+        lambda: adaugacheltuiala(4,150,"10.10.2020","canal",lista)
+    ])
+    lista = REDO(lista, undoOperations, redoOperations)
+    assert lista == [{'nrapartament': 1, 'suma': 50, 'data': '10.10.2020', 'tipul': 'canal'},
+                     {'nrapartament': 4, 'suma': 150, 'data': '10.10.2020', 'tipul': 'canal'}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

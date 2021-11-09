@@ -17,6 +17,10 @@ def runMENU(lista):
             runMenu(lista)
         elif optiune == "2":
             runConsole(lista)
+        elif optiune == "X":
+            break
+        else:
+            print("Optiune gresita! Reincercati: ")
 
 
 def printMenuconsole():
@@ -37,10 +41,6 @@ def runConsole(lista):
             lista = uireadCommandLine(lista)
         elif optiune == "A":
             showAllCommand(lista)
-        elif optiune == "I":
-            break
-        else:
-            print("Optiune gresita!Reincercati!")
 
 
 def readCommandLine(stringCommandLine, lista):

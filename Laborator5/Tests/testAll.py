@@ -2,7 +2,7 @@ from Tests.testCRUD import testAdaugacheltuiala, testStergecheltuiala, testModif
     testgetBynrapartament
 from Tests.testDomain import testcheltuiala
 from Tests.testfunctionalitati import testadunarevalori, testceamaimarecheltuiala, testordonaredescdupasuma, \
-    testafisareasumelorlunare
+    testafisareasumelorlunare, testUNDO
 
 
 def runAllTests():
@@ -16,7 +16,7 @@ def runAllTests():
     testgetBynrapartament()
     testordonaredescdupasuma()
     testafisareasumelorlunare()
-    #testUNDO()
+    testUNDO()
     #testREDO()
 
 
